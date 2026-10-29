@@ -4,7 +4,7 @@ title: '0002 · Merge by demonstrated cause, not subject'
 owner: Kacper Borowiec / support desk
 status: proposed
 reviewed: 2026-10-29
-signature: Kacper Borowiec · kacperborowieckb · S01E03 · 2026-10-29
+signature: v1.eyJzdWIiOiI3ODMiLCJhdWQiOiJjaGFsbGVuZ2U6d2hhdC1pdC1zaG93cyIsImlhdCI6MTc5MzI2OTYxNiwiZXhwIjoxNzkzMzU2MDE2fQ.4nDqBT0rt09LV-dpEbunGF8f9nXkVpAZKDpeXBmHdt8
 ---
 
 <script>

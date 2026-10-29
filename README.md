@@ -33,7 +33,7 @@ npm run build
 npm run preview -- --port 4173
 ```
 
-Open http://localhost:4173/kb/incidents/4471-reassessment/ to inspect the generated table, queue timeline, dedupe explorer and desk ref **DR-GEC7-DJW7**. The build directory contains the entire static KB and its assets; serve it as a directory rather than opening a lone HTML file.
+Open http://localhost:4173/kb/incidents/4471-reassessment/ to inspect the generated table, queue timeline, dedupe explorer and desk ref **DR-V0QR-SWZZ**. The build directory contains the entire static KB and its assets; serve it as a directory rather than opening a lone HTML file.
 
 The page counts are computed by the original Svelte components, not handwritten into its prose. Accepted decision 0001 is not edited. Decision 0002 is a proposal awaiting the support owner's acceptance.
 
