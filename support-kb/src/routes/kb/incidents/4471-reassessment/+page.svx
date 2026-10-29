@@ -2,7 +2,7 @@
 layout: runbook
 title: '#4471 reassessment · two causes behind the date reports'
 owner: Kacper Borowiec / support desk
-status: investigated
+status: closed
 reviewed: 2026-10-29
 signature: Kacper Borowiec · kacperborowieckb · S01E03 · 2026-10-29
 ---
@@ -20,6 +20,19 @@ signature: Kacper Borowiec · kacperborowieckb · S01E03 · 2026-10-29
 The [original incident](/kb/incidents/4471) calls this one known parser issue. The rendered
 evidence separates two causes. The parser ticket cannot resolve the booking form's hint.
 This page reassesses the 4 October export, not a live production feed.
+
+## Final disposition · engineering update, 5 October
+
+The course desk has now reported **#4471 closed on 5 October**:
+
+- **Parser: fixed** — `fix(dates): parse dd/mm for eu locales`. The parser ticket is
+  closed as completed.
+- **Hint: won't fix** — booking-v3 form retired. The hint ticket is closed as not planned,
+  not as a shipped hint fix.
+
+Closure does not mean both defects were repaired. Keep the two causes and their separate
+outcomes visible. The computed table below describes the original export's merge state;
+its "no ticket of its own" label is historical, not the state of the newly filed GitHub issues.
 
 <CauseTable ticket={4471} />
 
@@ -51,7 +64,7 @@ and revise the partition rather than silently discarding them.
 <QueueTimeline ticket={4471} />
 
 Reports arrived before the bulk merge. A later merge date is desk processing, not the bug's
-start date or evidence of a new incident. Neither "known" nor a queued fix stops incoming reports.
+start date or evidence of a new incident. Neither "known" nor a queued fix stopped incoming reports.
 Check new arrivals against tenant configuration and symptoms; recompute counts on each fresh export.
 
 ## Triage from now on

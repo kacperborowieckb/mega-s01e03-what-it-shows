@@ -9,6 +9,10 @@ Reassessment of support ticket #4471 using the supplied KB export dated 2026-10-
 
 427 export rows → 412 unique IDs. Five one-day-move reports remain in the tenant-derived parser bucket with an explicit uncertainty note.
 
+## Final engineering disposition
+
+The course's later desk update closes #4471 on 5 October: parser **fixed** (`fix(dates): parse dd/mm for eu locales`); hint **won't fix** because booking-v3 was retired. GitHub #1 is completed; #2 is not planned. Retirement is not a hint repair.
+
 ## Deliverables
 
 - [Signed KB source](support-kb/src/routes/kb/incidents/4471-reassessment/+page.svx)
