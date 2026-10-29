@@ -1,0 +1,70 @@
+---
+layout: runbook
+title: '#4471 reassessment · two causes behind the date reports'
+owner: Kacper Borowiec / support desk
+status: investigated
+reviewed: 2026-10-29
+signature: Kacper Borowiec · kacperborowieckb · S01E03 · 2026-10-29
+---
+
+<script>
+  import CauseTable from '#lib/kb/CauseTable.svelte';
+  import QueueTimeline from '#lib/kb/QueueTimeline.svelte';
+  import DedupeExplorer from '#lib/kb/DedupeExplorer.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+  import Callout from '#lib/kb/Callout.svelte';
+</script>
+
+## Finding
+
+The [original incident](/kb/incidents/4471) calls this one known parser issue. The rendered
+evidence separates two causes. The parser ticket cannot resolve the booking form's hint.
+This page reassesses the 4 October export, not a live production feed.
+
+<CauseTable ticket={4471} />
+
+## Separate tickets
+
+- [Shared parser reads day-first dates as month-first](https://github.com/kacperborowieckb/mega-s01e03-what-it-shows/issues/1).
+  The shared parser interprets input month-first for day-first tenants. For example,
+  Harbour Dental's R-41200 describes 7 April becoming 4 July. Parse according to the
+  declared tenant format; test ambiguous and unambiguous dates through app, email and booking-v2.
+- [Booking-v3 date hint contradicts the tenant's parsing order](https://github.com/kacperborowieckb/mega-s01e03-what-it-shows/issues/2).
+  Its form says `MM/DD/YYYY`, while it reads input using the day-first tenant locale.
+  Alder Physio, Copper Studio and Pale Harbour run that form. Generate the hint and
+  parser from one locale-aware format. Test form submissions separately from app/email.
+
+Counts above are computed from unique report IDs, filtered to `mergedInto === 4471`.
+Export pages overlap; raw rows are not independent reports. Classification calls `causeOf`
+with each report's channel and the tenant directory's locale and form version.
+Browser locale and intake tags are guesses, not the grouping rule. The table shows their disagreements.
+
+<Callout kind="warn">
+The desk's one-day-move notes remain counted under their tenant-derived cause and are
+footnoted in the table. A one-day shift does not itself prove a month/day swap. Keep these
+reports for reproduction; if evidence establishes another cause, open a separate ticket
+and revise the partition rather than silently discarding them.
+</Callout>
+
+## What the queue shows
+
+<QueueTimeline ticket={4471} />
+
+Reports arrived before the bulk merge. A later merge date is desk processing, not the bug's
+start date or evidence of a new incident. Neither "known" nor a queued fix stops incoming reports.
+Check new arrivals against tenant configuration and symptoms; recompute counts on each fresh export.
+
+## Triage from now on
+
+The [old subject-only rule](/kb/triage/dedupe) and accepted decision 0001 remain historical
+records, not reliable evidence that two reports have the same cause. The replacement
+[decision 0002](/kb/decisions/0002-dedupe-by-cause) explains the new policy.
+
+<DedupeExplorer />
+
+Matching subjects can hide different causes; different subjects can describe the same one.
+Look up the tenant locale and booking form, read the channel and body, then merge only
+when the cause agrees. Unknown tenants need investigation, not an automatic merge.
+Review page dates and computed views before relying on older prose.
+
+<RenderStamp {signature} />

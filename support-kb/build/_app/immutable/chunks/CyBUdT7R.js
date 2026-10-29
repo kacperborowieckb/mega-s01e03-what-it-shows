@@ -1,0 +1,20 @@
+import{a as i,f,t as g}from"./mKQbQg_e.js";import"./CK-18XvR.js";import{w as e,i as b,n as w}from"./Cy8am61r.js";import{l as v,s as k}from"./Cale7Wdi.js";import{R as y}from"./BP1HldKP.js";import{C as _,Q as $}from"./CK-VSpnY.js";import{D as T}from"./BQTLQQwk.js";import{R as x}from"./CETDC5hX.js";import{C}from"./C_apkgUr.js";const t={layout:"runbook",title:"#4471 reassessment · two causes behind the date reports",owner:"Kacper Borowiec / support desk",status:"investigated",reviewed:"2026-10-29T00:00:00.000Z",signature:"Kacper Borowiec · kacperborowieckb · S01E03 · 2026-10-29"},{layout:z,title:F,owner:H,status:Q,reviewed:G,signature:R}=t;var S=f(`<h2>Finding</h2> <p>The <a href="/kb/incidents/4471">original incident</a> calls this one known parser issue. The rendered
+evidence separates two causes. The parser ticket cannot resolve the booking form’s hint.
+This page reassesses the 4 October export, not a live production feed.</p> <!> <h2>Separate tickets</h2> <ul><li><a href="https://github.com/kacperborowieckb/mega-s01e03-what-it-shows/issues/1" rel="nofollow">Shared parser reads day-first dates as month-first</a>.
+The shared parser interprets input month-first for day-first tenants. For example,
+Harbour Dental’s R-41200 describes 7 April becoming 4 July. Parse according to the
+declared tenant format; test ambiguous and unambiguous dates through app, email and booking-v2.</li> <li><a href="https://github.com/kacperborowieckb/mega-s01e03-what-it-shows/issues/2" rel="nofollow">Booking-v3 date hint contradicts the tenant’s parsing order</a>.
+Its form says <code>MM/DD/YYYY</code>, while it reads input using the day-first tenant locale.
+Alder Physio, Copper Studio and Pale Harbour run that form. Generate the hint and
+parser from one locale-aware format. Test form submissions separately from app/email.</li></ul> <p>Counts above are computed from unique report IDs, filtered to <code>mergedInto === 4471</code>.
+Export pages overlap; raw rows are not independent reports. Classification calls <code>causeOf</code> with each report’s channel and the tenant directory’s locale and form version.
+Browser locale and intake tags are guesses, not the grouping rule. The table shows their disagreements.</p> <!> <h2>What the queue shows</h2> <!> <p>Reports arrived before the bulk merge. A later merge date is desk processing, not the bug’s
+start date or evidence of a new incident. Neither “known” nor a queued fix stops incoming reports.
+Check new arrivals against tenant configuration and symptoms; recompute counts on each fresh export.</p> <h2>Triage from now on</h2> <p>The <a href="/kb/triage/dedupe">old subject-only rule</a> and accepted decision 0001 remain historical
+records, not reliable evidence that two reports have the same cause. The replacement <a href="/kb/decisions/0002-dedupe-by-cause">decision 0002</a> explains the new policy.</p> <!> <p>Matching subjects can hide different causes; different subjects can describe the same one.
+Look up the tenant locale and booking form, read the channel and body, then merge only
+when the cause agrees. Unknown tenants need investigation, not an automatic merge.
+Review page dates and computed views before relying on older prose.</p> <!>`,1);function D(d,p){const c=v(p,["children","$$slots","$$events","$$legacy"]);y(d,k(()=>c,()=>t,{children:(l,P)=>{var a=S(),r=e(b(a),4);_(r,{ticket:4471});var o=e(r,8);C(o,{kind:"warn",children:(u,j)=>{w();var m=g(`The desk's one-day-move notes remain counted under their tenant-derived cause and are
+footnoted in the table. A one-day shift does not itself prove a month/day swap. Keep these
+reports for reproduction; if evidence establishes another cause, open a separate ticket
+and revise the partition rather than silently discarding them.`);i(u,m)},$$slots:{default:!0}});var s=e(o,4);$(s,{ticket:4471});var n=e(s,8);T(n,{});var h=e(n,4);x(h,{get signature(){return R}}),i(l,a)},$$slots:{default:!0}}))}const J=Object.freeze(Object.defineProperty({__proto__:null,default:D,metadata:t},Symbol.toStringTag,{value:"Module"}));export{J as _,D as a};

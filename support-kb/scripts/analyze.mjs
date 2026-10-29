@@ -1,0 +1,15 @@
+import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import assert from 'node:assert/strict';
+import { uniqueById, groupByCause, readAs } from '../src/lib/kb/causes.ts';
+const read = (name) => JSON.parse(readFileSync(new URL(name, import.meta.url)));
+const raw = read('../src/lib/data/reports-4471.json');
+const tenants = readdirSync(new URL('../src/lib/data/tenants/', import.meta.url)).map((n) => read('../src/lib/data/tenants/' + n));
+const notes = read('../src/lib/data/desk-notes.json');
+const reports = uniqueById(raw).filter((r) => r.mergedInto === 4471);
+const groups = groupByCause(reports, (r) => tenants.find((t) => t.handle === r.tenant));
+const result = { rawRows: raw.length, uniqueReports: reports.length, groups: groups.map((g) => ({ ...g, reportCount: g.reports.length, oneDayMove: readAs(g, notes.oneDayMove), reportIds: g.reports.map((r) => r.id), reports: undefined })) };
+assert.equal(reports.length, 412);
+assert.equal(groups.reduce((n, g) => n + g.reports.length, 0), reports.length);
+assert.deepEqual(groups.map((g) => [g.cause, g.reports.length]), [['parser', 379], ['hint', 33]]);
+writeFileSync(new URL('../../analysis.json', import.meta.url), JSON.stringify(result, null, 2) + '\n');
+console.log(JSON.stringify({ ...result, groups: result.groups.map(({ reportIds, ...g }) => g) }, null, 2));

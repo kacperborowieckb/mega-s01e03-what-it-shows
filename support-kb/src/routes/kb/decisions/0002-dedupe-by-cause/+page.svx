@@ -1,0 +1,32 @@
+---
+layout: runbook
+title: '0002 · Merge by demonstrated cause, not subject'
+owner: Kacper Borowiec / support desk
+status: proposed
+reviewed: 2026-10-29
+signature: Kacper Borowiec · kacperborowieckb · S01E03 · 2026-10-29
+---
+
+<script>
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+</script>
+
+## Context
+
+The [reassessment of #4471](/kb/incidents/4471-reassessment) separates a shared parser
+defect from a booking-v3 hint defect. Subject equality and browser intake tags do not
+establish a common cause. Decision 0001 is retained unchanged as an accepted historical record.
+
+## Proposed replacement for decision 0001
+
+Deduplicate report IDs first. Read the body and resolve tenant locale, form version and
+channel. Merge into one engineering ticket only when evidence supports the same cause.
+Keep unknown or contradictory reports for investigation; do not infer a cause from the subject.
+
+## Consequences
+
+Triage needs more reading and tenant lookup, but each engineering ticket has a defensible
+scope and count. Re-run computed summaries on fresh exports while the desk keeps working.
+The support owner must approve this policy before it becomes accepted.
+
+<RenderStamp {signature} />
